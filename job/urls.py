@@ -5,5 +5,5 @@ app_name = 'job'
 
 urlpatterns = [
     path('', views.job_list, name='job_list'),
-    path('job_details', views.job_details, name='job_details'),
+    path('<str:slug>', views.job_details, name='job_details'),
 ]
