@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Job
 from django.core.paginator import Paginator
-from .forms import ApplyForm
+from .forms import ApplyForm, PostForm
 from django.urls import reverse
 
 
@@ -32,3 +32,19 @@ def job_details(request, slug):
 
     context = {'job': job_details, 'form': form}
     return render(request, 'job/job_details.html', context)
+
+
+def post_job(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            my_form = form.save(commit=False)
+            my_form.owner = request.user
+            my_form.save()
+            return redirect(reverse('jobs:job_list'))
+    
+    else:
+        form = PostForm
+
+    context = {'form': form}
+    return render(request, 'job/post_job.html', context)
