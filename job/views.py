@@ -3,6 +3,7 @@ from .models import Job
 from django.core.paginator import Paginator
 from .forms import ApplyForm, PostForm
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 
 def job_list(request):
@@ -34,6 +35,7 @@ def job_details(request, slug):
     return render(request, 'job/job_details.html', context)
 
 
+@login_required
 def post_job(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)

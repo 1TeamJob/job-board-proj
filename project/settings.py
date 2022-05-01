@@ -127,6 +127,8 @@ STATICFILES_DIRS = [
 MEIDA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'meida')
 
+LOGIN_REDIRECT_URL = '/jobs/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
