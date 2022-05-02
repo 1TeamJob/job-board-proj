@@ -9,8 +9,9 @@ def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
+            form.save()
             username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
+            password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect('/accounts/profile')
@@ -31,9 +32,10 @@ def profile(request):
 
 
 def edit_profile(request):
+    profile = Profile.objects.get(user=request.user)
     if request.method == 'POST':
-        user_form = UserForm(request.POST, request.Files)
-        profile_form = ProfileForm(request.POST, request.Files)
+        user_form = UserForm(request.POST, request.FILES ,instance=request.user)
+        profile_form = ProfileForm(request.POST, request.FILES ,instance=profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             any_profile = profile_form.save(commit=False)
@@ -46,8 +48,5 @@ def edit_profile(request):
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=profile)
         
-    context = {}
+    context = {'user_form': user_form, 'profile_form': profile_form}
     return render(request, 'accounts/edit_profile.html', context)
-
-
-

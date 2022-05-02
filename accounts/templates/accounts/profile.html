@@ -32,6 +32,9 @@
                                 <li>Phone Number: <span>{{ profile.phone_number }}</span></li>
                                 <li>Profile Photo: <span> {{ profile.profile_photo }}</span></li>
                             </ul>
+                            <div class="p-5">
+                            <a class="boxed-btn3 w-100" href="{% url 'accounts:edit_profile' %} "> Edit Profile </a>
+                            </div>
                         </div>
                     </div>
                 </div>
