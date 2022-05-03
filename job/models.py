@@ -46,6 +46,7 @@ class Category(models.Model):
 
 
 class Apply(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     email = models.EmailField(max_length=100)

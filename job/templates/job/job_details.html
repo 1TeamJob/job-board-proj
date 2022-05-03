@@ -77,10 +77,18 @@
                                     <li>Vacancy: <span>{{ job.vacancy }} Positions</span></li>
                                 
                                 {% endif %}
-                                    
 
+
+                                
+                                {% if job.experience <= 1 %}
+                                    <li>Vacancy: <span>{{ job.experience }} Year</span></li>
+                                
+                                {% else %}
+                                    <li>Experience: <span> {{ job.experience }} Years</span></li>
+                                
+                                {% endif %}
+                                
                                 <li>Salary: <span>{{ job.salary }}k/y</span></li>
-                                <li>Location: <span>California, USA</span></li>
                                 <li>Job Nature: <span> {{ job.job_type }}</span></li>
                             </ul>
                         </div>
